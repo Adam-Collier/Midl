@@ -1,5 +1,13 @@
 <template>
   <div class="page">
+    <div v-if="data.heroImage" class="interview-hero">
+      <div v-bind:style="{backgroundImage: `url(${$withBase(data.heroImage)})`}"></div>
+      <!-- <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero"> -->
+      <div>
+        <h1>{{data.heroTitle}}</h1>
+        <p>{{data.heroIntro}}</p>
+      </div>
+    </div>
     <Content :custom="false"/>
     <div class="content edit-link" v-if="editLink">
       <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
@@ -24,92 +32,95 @@
 </template>
 
 <script>
-import OutboundLink from './OutboundLink.vue'
-import { resolvePage, normalize, outboundRE, endingSlashRE } from './util'
+import OutboundLink from "./OutboundLink.vue";
+import { resolvePage, normalize, outboundRE, endingSlashRE } from "./util";
 
 export default {
   components: { OutboundLink },
-  props: ['sidebarItems'],
+  props: ["sidebarItems"],
   computed: {
-    prev () {
-      const prev = this.$page.frontmatter.prev
+    data() {
+      return this.$page.frontmatter;
+    },
+    prev() {
+      const prev = this.$page.frontmatter.prev;
       if (prev === false) {
-        return
+        return;
       } else if (prev) {
-        return resolvePage(this.$site.pages, prev, this.$route.path)
+        return resolvePage(this.$site.pages, prev, this.$route.path);
       } else {
-        return resolvePrev(this.$page, this.sidebarItems)
+        return resolvePrev(this.$page, this.sidebarItems);
       }
     },
-    next () {
-      const next = this.$page.frontmatter.next
+    next() {
+      const next = this.$page.frontmatter.next;
       if (next === false) {
-        return
+        return;
       } else if (next) {
-        return resolvePage(this.$site.pages, next, this.$route.path)
+        return resolvePage(this.$site.pages, next, this.$route.path);
       } else {
-        return resolveNext(this.$page, this.sidebarItems)
+        return resolveNext(this.$page, this.sidebarItems);
       }
     },
-    editLink () {
+    editLink() {
       const {
         repo,
         editLinks,
-        docsDir = '',
-        docsBranch = 'master',
+        docsDir = "",
+        docsBranch = "master",
         docsRepo = repo
-      } = this.$site.themeConfig
+      } = this.$site.themeConfig;
 
-      let path = normalize(this.$page.path)
+      let path = normalize(this.$page.path);
       if (endingSlashRE.test(path)) {
-        path += 'README.md'
+        path += "README.md";
       } else {
-        path += '.md'
+        path += ".md";
       }
 
       if (docsRepo && editLinks) {
         const base = outboundRE.test(docsRepo)
           ? docsRepo
-          : `https://github.com/${docsRepo}`
+          : `https://github.com/${docsRepo}`;
         return (
-          base.replace(endingSlashRE, '') +
+          base.replace(endingSlashRE, "") +
           `/edit/${docsBranch}/` +
-          docsDir.replace(endingSlashRE, '') +
+          docsDir.replace(endingSlashRE, "") +
           path
-        )
+        );
       }
     },
-    editLinkText () {
+    editLinkText() {
       return (
         this.$themeLocaleConfig.editLinkText ||
         this.$site.themeConfig.editLinkText ||
         `Edit this page`
-      )
+      );
     }
   }
+};
+
+function resolvePrev(page, items) {
+  return find(page, items, -1);
 }
 
-function resolvePrev (page, items) {
-  return find(page, items, -1)
+function resolveNext(page, items) {
+  return find(page, items, 1);
 }
 
-function resolveNext (page, items) {
-  return find(page, items, 1)
-}
-
-function find (page, items, offset) {
-  const res = []
+function find(page, items, offset) {
+  const res = [];
   items.forEach(item => {
-    if (item.type === 'group') {
-      res.push(...item.children || [])
+    if (item.type === "group") {
+      res.push(...(item.children || []));
     } else {
-      res.push(item)
+      res.push(item);
     }
-  })
+  });
   for (let i = 0; i < res.length; i++) {
-    const cur = res[i]
-    if (cur.type === 'page' && cur.path === page.path) {
-      return res[i + offset]
+    const cur = res[i];
+    if (cur.type === "page" && cur.path === page.path) {
+      return res[i + offset];
     }
   }
 }
@@ -137,4 +148,35 @@ function find (page, items, offset) {
     padding-top 1rem
   .next
     float right
+
+.interview-hero
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  align-items: flex-start
+  max-width: 1500px
+  margin: 0 auto
+  padding: 3.6rem 0 0 0;
+
+  div
+    &:nth-of-type(1) 
+      width: 55%
+      height: 37.5rem
+      flex 1 0 400px
+      background-size: cover;
+      background-position: center center;
+      
+  
+    &:nth-of-type(2)
+      padding: 2rem
+      align-self: flex-end
+      flex 1 0 400px
+      max-width: 450px
+  
+iframe 
+  width: 100%
+  display: block
+  margin: 0 auto
+  border-radius: 5px
+  margin: 4em 0 3.5em 0;
 </style>
