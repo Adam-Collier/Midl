@@ -130,24 +130,27 @@ function find(page, items, offset) {
 @import './styles/config.styl'
 
 .page
-  padding-bottom 2rem
+  padding-bottom: 2rem
 
 .edit-link.content
-  padding-top 0 !important
+  padding-top: 0 !important
+
   a
-    color lighten($textColor, 25%)
-    margin-right 0.25rem
+    color: lighten($textColor, 25%)
+    margin-right: 0.25rem
 
 .page-nav.content
-  padding-top 1rem !important
-  padding-bottom 0 !important
+  padding-top: 1rem !important
+  padding-bottom: 0 !important
+
   .inner
-    min-height 2rem
-    margin-top 0 !important
-    border-top 1px solid $borderColor
-    padding-top 1rem
+    min-height: 2rem
+    margin-top: 0 !important
+    border-top: 1px solid $borderColor
+    padding-top: 1rem
+
   .next
-    float right
+    float: right
 
 .interview-hero
   display: flex
@@ -156,27 +159,24 @@ function find(page, items, offset) {
   align-items: flex-start
   max-width: 1500px
   margin: 0 auto
-  padding: 3.6rem 0 0 0;
+  padding: 3.6rem 0 0 0
 
   div
-    &:nth-of-type(1) 
-      width: 55%
+    &:nth-of-type(1)
       height: 37.5rem
-      flex 1 0 400px
-      background-size: cover;
-      background-position: center center;
-      
-  
+      flex: 5 1 350px
+      background-size: cover
+      background-position: center center
+
     &:nth-of-type(2)
       padding: 2rem
       align-self: flex-end
-      flex 1 0 400px
-      max-width: 450px
-  
-iframe 
+      flex: 1 1 350px
+
+iframe
   width: 100%
   display: block
   margin: 0 auto
   border-radius: 5px
-  margin: 4em 0 3.5em 0;
+  margin: 4em 0 3.5em 0
 </style>
