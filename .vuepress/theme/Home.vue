@@ -77,21 +77,19 @@ export default {
   margin: 0px auto
 
   .interviews
-    display: flex
-    flex-wrap: wrap
+    display: grid
+    grid-gap: 40px
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
 
-
-  .interview 
-    flex: 0 1 250px
-    padding: 20px
-
+  .interview
+    // flex: 0 1 250px
     img
       width: 100%
 
-  .hero 
+  .hero
     text-align: center
 
-    img 
+    img
       max-height: 280px
       display: block
       margin: 3rem auto 1.5rem
@@ -132,7 +130,6 @@ export default {
     align-content: strech
     justify-content: space-between
 
-
   .feature
     flex-grow: 1
     flex-basis: 30%
@@ -172,7 +169,6 @@ export default {
       img
         max-height: 210px
         margin: 2rem auto 1.2rem
-
 
       h1
         font-size: 2rem
