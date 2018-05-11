@@ -1,6 +1,6 @@
 ---
 title: Adam Collier
-description: Blah Blah
+description: Austrian-born, now New York based designer working on the digital products and services that people use every day.
 image: /blah.jpg
 date: 01.03.18
 heroImage: /blah.jpg
