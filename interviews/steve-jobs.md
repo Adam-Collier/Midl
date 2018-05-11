@@ -1,6 +1,6 @@
 ---
 title: Steve Jobs
-description: This is Steve Job's interview
+description: Product designer at Streamlabs. Passionate about designing inclusive, effective, and impactful digital products.
 image: /blah.jpg
 date: 23.05.18
 ---
