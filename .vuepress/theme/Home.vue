@@ -14,7 +14,7 @@
     </div>
     <div class="interviews" v-if="articles.length">
       <div class="interview" v-for="article in articles">
-        <a :href=article.path>
+        <a :href=$withBase(article.path)>
           <img v-if="article.frontmatter.image" :src="$withBase(article.frontmatter.image)" alt="">
           <h2>{{article.frontmatter.title}}</h2>
           <p>{{article.frontmatter.description}}</p>
