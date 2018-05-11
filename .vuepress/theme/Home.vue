@@ -82,9 +82,18 @@ export default {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
 
   .interview
-    // flex: 0 1 250px
     img
       width: 100%
+
+    h2, p
+      margin-bottom: 0
+
+    h2
+      margin-top: 0.5em
+
+    p
+      font-size: 0.9rem
+      margin-top: 0.6em
 
   .hero
     text-align: center
