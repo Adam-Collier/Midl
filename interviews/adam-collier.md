@@ -3,13 +3,10 @@ title: Adam Collier
 description: Blah Blah
 image: /blah.jpg
 date: 01.03.18
+heroImage: /blah.jpg
+heroTitle: Adam Collier - Work & Co
+heroIntro: Austrian-born, now New York based designer working on the digital products and services that people use every day.
 ---
-
-![alt text](https://interfacelovers.com/thumbs/interviews/joris-rigerl/portrait-1300x1733.jpg)
-
-# Adam Collier - Work & Co
-
-Austrian-born, now New York based designer working on the digital products and services that people use every day.
 
 ## What led you into design?
 
