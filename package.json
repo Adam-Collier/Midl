@@ -1,0 +1,22 @@
+{
+  "name": "midl",
+  "version": "1.0.0",
+  "description": "Interviews with the best designers in Manchester",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adam-Collier/Midl.git"
+  },
+  "keywords": ["blog", "vuepress", "vue", "interview", "design", "mixes"],
+  "author": "Adam Collier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adam-Collier/Midl/issues"
+  },
+  "homepage": "https://github.com/Adam-Collier/Midl#readme"
+}
