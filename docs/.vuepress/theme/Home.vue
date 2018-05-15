@@ -12,15 +12,20 @@
         <p>{{ feature.details }}</p>
       </div>
     </div>
-    <div class="interviews" v-if="articles.length">
-      <div class="interview" v-for="article in articles">
-        <a :href=$withBase(article.path)>
-          <img v-if="article.frontmatter.image" :src="$withBase(article.frontmatter.image)" alt="">
-          <h2>{{article.frontmatter.title}}</h2>
-          <p>{{article.frontmatter.description}}</p>
-        </a>
+      <div class="interviews" v-if="articles.length">
+        <div @click="interview($event, article.path)" class="interview" v-for="article in articles">
+          <!-- <router-link :to="article.path"> -->
+            <div>
+              <img v-if="article.frontmatter.image" :src="$withBase(article.frontmatter.image)" alt="">
+            </div>
+            <div>
+              <h2>{{article.frontmatter.title}}</h2>
+              <p>{{article.frontmatter.description}}</p>
+            </div>
+          <!-- </router-link> -->
+        </div>
       </div>
-    </div>
+    </transition>
     <Content custom/>
     <div class="footer" v-if="data.footer">
       {{ data.footer }}
@@ -33,6 +38,43 @@ import NavLink from "./NavLink.vue";
 
 export default {
   components: { NavLink },
+  data: function() {
+    return {
+      styleObject: {}
+    };
+  },
+  methods: {
+    interview: function(event, path) {
+      event.preventDefault();
+      console.log(event.currentTarget.parentElement.parentElement);
+      let el = event.currentTarget;
+      let pos = el.getBoundingClientRect();
+      console.log(pos.left, pos.right);
+
+      el.classList.add("transitioning");
+      el.parentElement.parentElement.classList.add("expand");
+
+      let styleObject = {
+        transform: `translateY(-${pos.top}px)`,
+        transformOrigin: "left top",
+        transition: "all 500ms ease-in"
+      };
+
+      Object.assign(el.style, styleObject);
+
+      // document.querySelectorAll(".interview").forEach(x => {
+      //   if (x !== event.currentTarget) {
+      //     x.style.opacity = 0;
+      //   }
+      // });
+      // el.querySelector("img").style = styleObject;
+      // el.style.transform = `translateX(-${pos.left}px) translateY(-${pos.top -
+      //   57}px)`;
+      // el.style.transition = "all 500ms ease-in-out";
+
+      // this.$router.push(path);
+    }
+  },
   computed: {
     data() {
       return this.$page.frontmatter;
@@ -94,6 +136,33 @@ export default {
     p
       font-size: 0.9rem
       margin-top: 0.6em
+
+  .transitioning
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    align-items: flex-start
+    max-width: 1500px
+    margin: 0 auto
+    padding: 3.6rem 0 0
+    grid-column: 1 / -1
+
+    div
+      &:nth-child(1)
+        height: 37.5rem
+        flex: 5 1 350px
+
+        img
+          width: 100%
+          height: 100%
+          object-fit: cover
+
+      &:nth-child(2)
+        padding: 2rem
+        align-self: flex-end
+        flex: 1 1 350px
+        opacity: 0
+        transition: all 500ms ease-in-out
 
   .hero
     text-align: center
@@ -159,6 +228,10 @@ export default {
     border-top: 1px solid $borderColor
     text-align: center
     color: lighten($textColor, 25%)
+
+.expand
+  max-width: none
+  padding: 0
 
 @media (max-width: $MQMobile)
   .home
