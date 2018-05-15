@@ -53,26 +53,23 @@ export default {
 
       el.classList.add("transitioning");
       el.parentElement.parentElement.classList.add("expand");
+      document.querySelectorAll(".interview").forEach(x => {
+        if (x !== el) {
+          x.classList.add("hide");
+        }
+      });
 
       let styleObject = {
         transform: `translateY(-${pos.top}px)`,
-        transformOrigin: "left top",
+        transformOrigin: "center center",
         transition: "all 500ms ease-in"
       };
 
       Object.assign(el.style, styleObject);
 
-      // document.querySelectorAll(".interview").forEach(x => {
-      //   if (x !== event.currentTarget) {
-      //     x.style.opacity = 0;
-      //   }
-      // });
-      // el.querySelector("img").style = styleObject;
-      // el.style.transform = `translateX(-${pos.left}px) translateY(-${pos.top -
-      //   57}px)`;
-      // el.style.transition = "all 500ms ease-in-out";
-
-      // this.$router.push(path);
+      setTimeout(() => {
+        this.$router.push(path);
+      }, 800);
     }
   },
   computed: {
@@ -137,6 +134,10 @@ export default {
       font-size: 0.9rem
       margin-top: 0.6em
 
+  .hide
+    opacity: 0
+    transition: all 500ms ease-in-out
+
   .transitioning
     display: flex
     flex-wrap: wrap
@@ -146,6 +147,7 @@ export default {
     margin: 0 auto
     padding: 3.6rem 0 0
     grid-column: 1 / -1
+    transition: all 600ms ease-in-out
 
     div
       &:nth-child(1)
@@ -162,7 +164,14 @@ export default {
         align-self: flex-end
         flex: 1 1 350px
         opacity: 0
-        transition: all 500ms ease-in-out
+
+    &:before
+      content: ''
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      background: white
 
   .hero
     text-align: center
@@ -231,7 +240,7 @@ export default {
 
 .expand
   max-width: none
-  padding: 0
+  padding: 3.6rem 0 0
 
 @media (max-width: $MQMobile)
   .home
