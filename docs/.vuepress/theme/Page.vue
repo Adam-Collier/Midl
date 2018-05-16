@@ -3,10 +3,13 @@
     <div v-if="data.heroImage" class="interview-hero">
       <div v-bind:style="{backgroundImage: `url(${$withBase(data.heroImage)})`}"></div>
       <!-- <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero"> -->
-      <div>
-        <h1>{{data.heroTitle}}</h1>
-        <p>{{data.heroIntro}}</p>
-      </div>
+        <div>
+          <transition-group name="intro" appear>
+            <h1 key="1">{{data.heroTitle}}</h1>
+            <p key="2">{{data.heroIntro}}</p>
+          </transition-group>
+        </div>
+      </transition>
     </div>
     <Content :custom="false"/>
     <div class="content edit-link" v-if="editLink">
@@ -172,6 +175,24 @@ function find(page, items, offset) {
       padding: 2rem
       align-self: flex-end
       flex: 1 1 350px
+
+.intro-enter-active
+  &:nth-child(1)
+    transition: all 500ms 800ms
+
+  &:nth-child(2)
+    transition: all 500ms 900ms
+
+.intro-enter
+  opacity: 0
+  transform: translateY(30px)
+
+.intro-enter-to
+  opacity: 1
+  transform: translateY(0px)
+
+.description-delay
+  transition: all 500ms 1000ms
 
 iframe
   width: 100%

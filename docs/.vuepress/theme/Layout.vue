@@ -12,11 +12,15 @@
     <div class="custom-layout" v-if="$page.frontmatter.layout">
       <component :is="$page.frontmatter.layout"/>
     </div>
-    <Home v-else-if="$page.frontmatter.home"/>
-    <Page v-else :sidebar-items="sidebarItems">
-      <slot name="page-top" slot="top"/>
-      <slot name="page-bottom" slot="bottom"/>
-    </Page>
+    <transition :name="transitionName" @after-leave="afterLeave">
+      <template>
+        <Home v-if="$page.frontmatter.home"/>
+        <Page v-if :sidebar-items="sidebarItems">
+          <slot name="page-top" slot="top"/>
+          <slot name="page-bottom" slot="bottom"/>
+        </Page>
+      </template>
+    </transition>
   </div>
 </template>
 
@@ -34,8 +38,17 @@ export default {
   components: { Home, Page, Sidebar, Navbar },
   data() {
     return {
-      isSidebarOpen: false
+      isSidebarOpen: false,
+      transitionName: ""
     };
+  },
+
+  watch: {
+    $route(to, from) {
+      console.log(to.path.includes("interview"));
+      const isInterview = to.path.includes("interview");
+      this.transitionName = isInterview ? "interview" : "home";
+    }
   },
 
   computed: {
@@ -87,6 +100,16 @@ export default {
       this.$ssrContext.description =
         this.$page.description || this.$description;
     }
+    // update existing scrollBehavior in $rooter.options
+    let scrollBehavior = (to, from, savedPosition) => {
+      return new Promise(resolve => {
+        // wait for triggerScroll to be emitted from javascript hook
+        this.$root.$once("triggerScroll", () => {
+          resolve({ x: 0, y: 0 });
+        });
+      });
+    };
+    this.$router.options.scrollBehavior = scrollBehavior;
   },
 
   mounted() {
@@ -151,6 +174,10 @@ export default {
           this.toggleSidebar(false);
         }
       }
+    },
+    // transition javascript hook
+    afterLeave() {
+      this.$root.$emit("triggerScroll");
     }
   }
 };
@@ -176,3 +203,47 @@ function updateMetaTags(meta, current) {
 
 <style src="prismjs/themes/prism-tomorrow.css"></style>
 <style src="./styles/theme.styl" lang="stylus"></style>
+<style lang="stylus">
+// transition variables
+$transition = 10vw
+$transitionSpeed = 400ms
+$transitionDelay = 400ms
+
+// transitions
+.interview-enter-active
+  transition: all $transitionSpeed $transitionDelay
+
+.interview-leave-active
+  transition: all $transitionSpeed ease-in
+
+.interview-enter
+  opacity: 0
+  transform: translateX($transition)
+
+.interview-enter-to, .interview-leave
+  opacity: 1
+  transform: translateX(0px)
+
+.interview-leave-to
+  opacity: 0
+  transform: translateX(- $transition)
+
+.home-enter-active
+  transition: all $transitionSpeed $transitionDelay
+
+.home-leave-active
+  transition: all $transitionSpeed ease-in
+
+.home-enter
+  opacity: 0
+  transform: translateX(- $transition)
+
+.home-enter-to, .interview-leave
+  opacity: 1
+  transform: translateX(0px)
+
+.home-leave-to
+  opacity: 0
+  transform: translateX($transition)
+</style>
+

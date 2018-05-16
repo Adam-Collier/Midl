@@ -14,11 +14,11 @@
     </div>
     <div class="interviews" v-if="articles.length">
       <div class="interview" v-for="article in articles">
-        <a :href=$withBase(article.path)>
+        <router-link :to="article.path">
           <img v-if="article.frontmatter.image" :src="$withBase(article.frontmatter.image)" alt="">
           <h2>{{article.frontmatter.title}}</h2>
           <p>{{article.frontmatter.description}}</p>
-        </a>
+        </router-link>
       </div>
     </div>
     <Content custom/>
