@@ -93,7 +93,9 @@ export default {
 
     p
       font-size: 0.9rem
+      font-weight: 400
       margin-top: 0.6em
+      color: lighten($textColor, 40%)
 
   .hero
     text-align: center

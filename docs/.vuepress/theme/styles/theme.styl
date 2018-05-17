@@ -3,6 +3,7 @@
 @require './code'
 @require './custom-blocks'
 @require './arrow'
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro:600')
 
 html, body
   padding: 0
@@ -125,10 +126,13 @@ h1, h2, h3, h4, h5, h6
 
 h1
   font-size: 3rem
+  font-family: 'Source Serif Pro', serif
+  font-weight: 600
 
 h2
   font-size: 1.65rem
-  // padding-bottom: 0.3rem
+  font-family: 'Source Serif Pro', serif
+  font-weight: 600
 
 h3
   font-size: 1.35rem
@@ -149,6 +153,9 @@ code, kbd
 
 p, ul, ol
   line-height: 1.7
+
+span p
+  color: lighten($textColor, 40%)
 
 hr
   border: 0
@@ -182,7 +189,7 @@ th, td
         margin-top: 1.5rem
         padding-top: 0
 
-@media (min-width: (((($MQMobile + 1px)))))
+@media (min-width: (((((((((((((((((((((((($MQMobile + 1px)))))))))))))))))))))))))
   .theme-container.no-sidebar
     .sidebar
       display: none
