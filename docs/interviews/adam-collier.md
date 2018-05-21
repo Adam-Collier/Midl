@@ -1,9 +1,9 @@
 ---
 title: Adam Collier
 description: Austrian-born, now New York based designer working on the digital products and services that people use every day.
-image: /blah.jpg
+image: /adam-collier/blah.jpg
 date: 01.03.18
-heroImage: /blah.jpg
+heroImage: /adam-collier/blah.jpg
 heroTitle: Adam Collier - Work & Co
 heroIntro: Austrian-born, now New York based designer working on the digital products and services that people use every day.
 ---
@@ -23,6 +23,10 @@ We get catered lunch at noon, so I take a break for that and then get back to wo
 ## What’s your setup?
 
 It’s really quite basic. At Work & Co we always sit together with our project teams, which means we have to move around a lot. That’s why most people keep their desks pretty clean to make that process a little easier.
+
+<!-- {{ $site.base }} -->
+
+<img :src="$withBase('/adam-collier/workplace.jpg')" alt="foo">
 
 ## Where do you go to get inspired?
 
