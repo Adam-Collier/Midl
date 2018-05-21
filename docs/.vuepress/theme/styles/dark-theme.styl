@@ -1,0 +1,66 @@
+@require './dark-config.styl'
+
+.dark
+  background-color: $bgPrimary
+  color: $textColor
+  min-height: 100vh
+
+  body
+    color: $textColor
+
+  .home .interview p
+    color: #FFFFFF
+
+  .navbar
+    border-bottom: 1px solid $borderColor
+    background-color: $bgSecondary
+
+  .sidebar
+    border-right: 1px solid $borderColor
+
+  a
+    color: $textColor
+
+  p a code
+    color: $accentColor
+
+  kbd
+    background: #eee
+    border: solid 0.15rem #ddd
+    border-bottom: solid 0.25rem #ddd
+
+  blockquote
+    color: #999
+    border-left: 0.25rem solid #dfe2e5
+
+  span
+    p
+      color: lighten($textColor, 40%)
+
+  hr
+    border-top: 1px solid $borderColor
+
+  tr
+    border-top: 1px solid #dfe2e5
+
+    &:nth-child(2n)
+      background-color: #f6f8fa
+
+  th, td
+    border: 1px solid #dfe2e5
+
+  a.router-link-active, .nav-links a:hover
+    color: $textColor
+
+  .site-name
+    color: $textColor
+
+  .search-box input
+    background: #182430 url('/assets/img/search.83621669.svg') 0.6rem 0.5rem no-repeat
+    background-size: 1rem
+    color: $textColor
+    border-color: #141d26
+
+  .switch-theme
+    transition: all 300ms ease-in-out
+    fill: #3EAF7C
