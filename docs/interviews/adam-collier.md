@@ -24,9 +24,10 @@ We get catered lunch at noon, so I take a break for that and then get back to wo
 
 It’s really quite basic. At Work & Co we always sit together with our project teams, which means we have to move around a lot. That’s why most people keep their desks pretty clean to make that process a little easier.
 
-<!-- {{ $site.base }} -->
-
-<img :src="$withBase('/adam-collier/workplace.jpg')" alt="foo">
+<div>
+    <img :src="$withBase('/adam-collier/workplace.jpg')" alt="workplace">
+    <img :src="$withBase('/adam-collier/dock.png')" alt="dock">
+</div>
 
 ## Where do you go to get inspired?
 
@@ -45,6 +46,10 @@ In the last two years at Work & Co, I've worked on a variety of projects—there
 One of the first projects I worked on at Work & Co was the mobile app for Virgin America. It’s such a complicated product and it was incredibly tough to make it as simple as we did. The team on it, especially Joe Stewart who lead the design, really kicked my butt when it came to paying attention to details and I think I’m a better designer for it. It's also a project that was built 100% by Work & Co, which is super important to ensuring all those fussy details make it into market. Props to our engineering and QA teams for pulling it off.
 
 The other project I want to highlight was the mobile app for Marriott which we worked on early in 2016. It was very indicative of our process at Work & Co where we had a focused amount of time concepting, prototyping, and testing ideas. Some of them are far out and crazy, which is how we pushed for a new navigation for Marriott's app. Because the app automatically adjusts based on context—say you're planning a trip or you're checked in to a stay—we opted not to have a traditional home screen or navigation. Instead, you land on the most relevant section and can cycle through the rest using a single button. It's hard to describe (which is why we prototype), but once used in context it is really intuitive and ownable for Marriott. I don't think we'd have arrived at a solution like that without trying out so many other concepts first.
+
+<div>
+    <img :src="$withBase('/adam-collier/dock.png')" alt="dock">
+</div>
 
 ## What design challenges do you face at your company?
 
