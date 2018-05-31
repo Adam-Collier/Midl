@@ -5,8 +5,8 @@
       <!-- <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero"> -->
         <div>
           <transition-group name="intro" appear>
-            <h1 key="1">{{data.heroTitle}}</h1>
-            <p key="2">{{data.heroIntro}}</p>
+            <h1 key="1">{{data.title}} - {{data.work}}</h1>
+            <p key="2">{{data.description}}</p>
           </transition-group>
         </div>
       </transition>
@@ -134,6 +134,13 @@ function find(page, items, offset) {
 
 .page
   padding-bottom: 2rem
+
+  .content
+    div
+      padding: 2.5rem 0
+
+  a
+    color: $linkColor
 
 .edit-link.content
   padding-top: 0 !important
