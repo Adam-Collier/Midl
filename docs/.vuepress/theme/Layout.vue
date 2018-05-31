@@ -1,6 +1,6 @@
 <template>
   <div class="theme-container"
-    :class="pageClasses"
+    :class="[pageClasses, theme]"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd">
     <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar"/>
@@ -21,6 +21,7 @@
         </Page>
       </template>
     </transition>
+    <svg @click="changeTheme" class="switch-theme" width="100%" height="100%" viewBox="0 0 480 448" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;"><path d="M172.597,48.286c17.925,-5.808 37.046,-8.946 56.895,-8.946c101.917,0 184.66,82.743 184.66,184.66c0,101.917 -82.743,184.66 -184.66,184.66c-92.016,0 -168.403,-67.448 -182.376,-155.559c20.394,15.728 45.946,25.087 73.667,25.087c66.662,0 120.783,-54.121 120.783,-120.783c0,-48.122 -28.203,-89.71 -68.969,-109.119Z" style="stroke-width:13px;stroke:#3eaf7c;"/></svg>
   </div>
 </template>
 
@@ -39,7 +40,8 @@ export default {
   data() {
     return {
       isSidebarOpen: false,
-      transitionName: ""
+      transitionName: "",
+      theme: ""
     };
   },
 
@@ -178,6 +180,12 @@ export default {
     // transition javascript hook
     afterLeave() {
       this.$root.$emit("triggerScroll");
+    },
+    changeTheme() {
+      console.log("theme changed");
+      console.log(this.theme);
+      const isDark = this.theme.includes("dark");
+      this.theme = isDark ? "" : "dark";
     }
   }
 };
@@ -204,6 +212,15 @@ function updateMetaTags(meta, current) {
 <style src="prismjs/themes/prism-tomorrow.css"></style>
 <style src="./styles/theme.styl" lang="stylus"></style>
 <style lang="stylus">
+.switch-theme
+  fill: #FFFFFF
+  position: fixed
+  bottom: 20px
+  right: 20px
+  width: 30px
+  height: 30px
+  cursor: pointer
+
 // transition variables
 $transition = 10vw
 $transitionSpeed = 400ms
