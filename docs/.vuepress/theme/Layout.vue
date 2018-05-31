@@ -68,14 +68,6 @@ export default {
       } else if (fromPath.includes("mixes") && toPath.includes("interview")) {
         this.transitionName = "interview";
       }
-
-      // if (nextPath.includes("interview")) {
-      //   this.transitionName = "interview";
-      // } else if (nextPath.includes("mixes")) {
-      //   this.transitionName = "mixes";
-      // } else {
-      //   this.transitionName = "home";
-      // }
     }
   },
 
