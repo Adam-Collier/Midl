@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Adam-Collier/Midl/issues"
   },
-  "homepage": "https://github.com/Adam-Collier/Midl#readme"
+  "homepage": "https://github.com/Adam-Collier/Midl#readme",
+  "dependencies": {
+    "request-promise": "^4.2.2"
+  }
 }
