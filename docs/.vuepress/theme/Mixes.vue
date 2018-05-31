@@ -1,21 +1,12 @@
 <template>
   <div class="page">
-    <div v-if="data.heroImage" class="interview-hero">
-      <div v-bind:style="{backgroundImage: `url(${$withBase(data.heroImage)})`}"></div>
-      <!-- <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero"> -->
-        <div>
-          <transition-group name="intro" appear>
-            <h1 key="1">{{data.title}} - {{data.work}}</h1>
-            <p key="2">{{data.description}}</p>
-          </transition-group>
-        </div>
-      </transition>
-    </div>
     <Content :custom="false"/>
+    <div class="mixes">{{mixes}}</div>
     <div class="content edit-link" v-if="editLink">
       <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
       <OutboundLink/>
     </div>
+    {{mixes}}
     <div class="content page-nav" v-if="prev || next">
       <p class="inner">
         <span v-if="prev" class="prev">
@@ -44,26 +35,6 @@ export default {
   computed: {
     data() {
       return this.$page.frontmatter;
-    },
-    prev() {
-      const prev = this.$page.frontmatter.prev;
-      if (prev === false) {
-        return;
-      } else if (prev) {
-        return resolvePage(this.$site.pages, prev, this.$route.path);
-      } else {
-        return resolvePrev(this.$page, this.sidebarItems);
-      }
-    },
-    next() {
-      const next = this.$page.frontmatter.next;
-      if (next === false) {
-        return;
-      } else if (next) {
-        return resolvePage(this.$site.pages, next, this.$route.path);
-      } else {
-        return resolveNext(this.$page, this.sidebarItems);
-      }
     },
     editLink() {
       const {
@@ -99,6 +70,52 @@ export default {
         this.$site.themeConfig.editLinkText ||
         `Edit this page`
       );
+    },
+    mixes() {
+      //   fetch("https://api.spotify.com/v1/users/1134435866/playlists", {
+      //     headers: { Authorization: "Bearer " + accessToken }
+      //   })
+      //     .then(response => {
+      //       return response.json();
+      //     })
+      //     .then(data => {
+      //       console.log(data);
+      //     });
+
+      // Get the hash of the url
+
+      const hash = window.location.hash
+        .substring(1)
+        .split("&")
+        .reduce(function(initial, item) {
+          if (item) {
+            var parts = item.split("=");
+            initial[parts[0]] = decodeURIComponent(parts[1]);
+          }
+          return initial;
+        }, {});
+      window.location.hash = "";
+
+      // Set token
+      //   let _token = hash.access_token;
+      let _token =
+        "BQAMokzpKRFFdN12XcqGqZeitl8-EAk1hdzN5fKC23sfLKzrHsWlc-gcABBLnR7qhkPTj-DEb4K9e8txmy7xzQnGHynBtfDiKlCcvtcmfP2gpBzVgR8wkOhTa521eHYGEchKWLdQ0oWMQoM24pE_duNwKbjw1CNP4tspWf8";
+
+      console.log(_token);
+
+      const authEndpoint = "https://accounts.spotify.com/authorize";
+
+      // Replace with your app's client ID, redirect URI and desired scopes
+      const clientId = "0d5b2b268c1241de958c8883f7d4340e";
+      const redirectUri = "http://localhost:8080/Midl/mixes";
+      const scopes = ["user-top-read"];
+
+      // If there is no token, redirect to Spotify authorization
+      if (!_token) {
+        window.location = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+          "%20"
+        )}&response_type=token&show_dialog=true`;
+      }
     }
   }
 };
@@ -131,80 +148,4 @@ function find(page, items, offset) {
 
 <style lang="stylus">
 @import './styles/config.styl'
-
-.page
-  padding-bottom: 2rem
-
-  .content
-    div
-      padding: 2.5rem 0
-
-  a
-    color: $linkColor
-
-.edit-link.content
-  padding-top: 0 !important
-
-  a
-    color: lighten($textColor, 25%)
-    margin-right: 0.25rem
-
-.page-nav.content
-  padding-top: 1rem !important
-  padding-bottom: 0 !important
-
-  .inner
-    min-height: 2rem
-    margin-top: 0 !important
-    border-top: 1px solid $borderColor
-    padding-top: 1rem
-
-  .next
-    float: right
-
-.interview-hero
-  display: flex
-  flex-wrap: wrap
-  justify-content: center
-  align-items: flex-start
-  max-width: 1500px
-  margin: 0 auto
-  padding: 3.6rem 0 0 0
-
-  div
-    &:nth-of-type(1)
-      height: 37.5rem
-      flex: 5 1 350px
-      background-size: cover
-      background-position: center center
-
-    &:nth-of-type(2)
-      padding: 2rem
-      align-self: flex-end
-      flex: 1 1 350px
-
-.intro-enter-active
-  &:nth-child(1)
-    transition: all 500ms 800ms
-
-  &:nth-child(2)
-    transition: all 500ms 900ms
-
-.intro-enter
-  opacity: 0
-  transform: translateY(30px)
-
-.intro-enter-to
-  opacity: 1
-  transform: translateY(0px)
-
-.description-delay
-  transition: all 500ms 1000ms
-
-iframe
-  width: 100%
-  display: block
-  margin: 0 auto
-  border-radius: 5px
-  margin: 4em 0 3.5em 0
 </style>

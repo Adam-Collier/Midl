@@ -15,6 +15,8 @@
     <transition :name="transitionName" @after-leave="afterLeave">
       <template>
         <Home v-if="$page.frontmatter.home"/>
+        <Interviews v-if="$page.frontmatter.interviews"/>
+        <Mixes v-if="$page.frontmatter.mixes"/>
         <Page v-if :sidebar-items="sidebarItems">
           <slot name="page-top" slot="top"/>
           <slot name="page-bottom" slot="bottom"/>
@@ -31,12 +33,14 @@ import nprogress from "nprogress";
 import Home from "./Home.vue";
 import Navbar from "./Navbar.vue";
 import Page from "./Page.vue";
+import Interviews from "./Interviews.vue";
+import Mixes from "./Mixes.vue";
 import Sidebar from "./Sidebar.vue";
 import { pathToComponentName } from "@app/util";
 import { resolveSidebarItems } from "./util";
 
 export default {
-  components: { Home, Page, Sidebar, Navbar },
+  components: { Home, Page, Sidebar, Navbar, Interviews, Mixes },
   data() {
     return {
       isSidebarOpen: false,
@@ -47,9 +51,23 @@ export default {
 
   watch: {
     $route(to, from) {
-      console.log(to.path.includes("interview"));
-      const isInterview = to.path.includes("interview");
-      this.transitionName = isInterview ? "interview" : "home";
+      console.log(to.path);
+      const toPath = to.path;
+      const fromPath = from.path;
+
+      if (toPath.includes("interview") && fromPath == "/") {
+        this.transitionName = "interview";
+      } else if (fromPath == "/" && toPath.includes("mixes")) {
+        this.transitionName = "home";
+      } else if (fromPath.includes("mixes") && toPath == "/") {
+        this.transitionName = "interview";
+      } else if (fromPath.includes("interview") && toPath == "/") {
+        this.transitionName = "home";
+      } else if (fromPath.includes("interview") && toPath.includes("mixes")) {
+        this.transitionName = "home";
+      } else if (fromPath.includes("mixes") && toPath.includes("interview")) {
+        this.transitionName = "interview";
+      }
     }
   },
 
@@ -182,8 +200,6 @@ export default {
       this.$root.$emit("triggerScroll");
     },
     changeTheme() {
-      console.log("theme changed");
-      console.log(this.theme);
       const isDark = this.theme.includes("dark");
       this.theme = isDark ? "" : "dark";
     }
@@ -213,7 +229,7 @@ function updateMetaTags(meta, current) {
 <style src="./styles/theme.styl" lang="stylus"></style>
 <style lang="stylus">
 .switch-theme
-  fill: #FFFFFF
+  fill: none
   position: fixed
   bottom: 20px
   right: 20px
@@ -262,5 +278,23 @@ $transitionDelay = 400ms
 .home-leave-to
   opacity: 0
   transform: translateX($transition)
+
+.mixes-enter-active
+  transition: all $transitionSpeed $transitionDelay
+
+.mixes-leave-active
+  transition: all $transitionSpeed ease-in
+
+.mixes-enter
+  opacity: 0
+  transform: translateX($transition)
+
+.mixes-enter-to, .interview-leave
+  opacity: 1
+  transform: translateX(0px)
+
+.mixes-leave-to
+  opacity: 0
+  transform: translateX(- $transition)
 </style>
 

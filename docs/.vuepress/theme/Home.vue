@@ -15,7 +15,7 @@
     <div class="interviews" v-if="articles.length">
       <div class="interview" v-for="article in articles">
         <router-link :to="article.path">
-          <img v-if="article.frontmatter.image" :src="$withBase(article.frontmatter.image)" alt="">
+          <img v-if="article.frontmatter.heroImage" :src="$withBase(article.frontmatter.heroImage)" alt="">
           <h2>{{article.frontmatter.title}}</h2>
           <p>{{article.frontmatter.description}}</p>
         </router-link>
@@ -80,10 +80,12 @@ export default {
     display: grid
     grid-gap: 40px
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+    padding-top: 2.5rem
 
   .interview
     img
       width: 100%
+      transform: translateZ(0)
 
     h2, p
       margin-bottom: 0
@@ -96,6 +98,7 @@ export default {
       font-weight: 400
       margin-top: 0.6em
       color: lighten($textColor, 40%)
+      transform: translateZ(0)
 
   .hero
     text-align: center

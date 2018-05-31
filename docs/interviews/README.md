@@ -1,1 +1,3 @@
-# Hello this is the interview page
+---
+interviews: true
+---
