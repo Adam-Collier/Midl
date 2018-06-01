@@ -1,12 +1,10 @@
 <template>
-  <div class="page">
-    <Content :custom="false"/>
-    <div class="mixes">{{mixes}}</div>
+  <div class="mixes">
+      <Content :custom="false"/>
     <div class="content edit-link" v-if="editLink">
       <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
       <OutboundLink/>
     </div>
-    {{mixes}}
     <div class="content page-nav" v-if="prev || next">
       <p class="inner">
         <span v-if="prev" class="prev">
@@ -70,52 +68,6 @@ export default {
         this.$site.themeConfig.editLinkText ||
         `Edit this page`
       );
-    },
-    mixes() {
-      //   fetch("https://api.spotify.com/v1/users/1134435866/playlists", {
-      //     headers: { Authorization: "Bearer " + accessToken }
-      //   })
-      //     .then(response => {
-      //       return response.json();
-      //     })
-      //     .then(data => {
-      //       console.log(data);
-      //     });
-
-      // Get the hash of the url
-
-      const hash = window.location.hash
-        .substring(1)
-        .split("&")
-        .reduce(function(initial, item) {
-          if (item) {
-            var parts = item.split("=");
-            initial[parts[0]] = decodeURIComponent(parts[1]);
-          }
-          return initial;
-        }, {});
-      window.location.hash = "";
-
-      // Set token
-      //   let _token = hash.access_token;
-      let _token =
-        "BQAMokzpKRFFdN12XcqGqZeitl8-EAk1hdzN5fKC23sfLKzrHsWlc-gcABBLnR7qhkPTj-DEb4K9e8txmy7xzQnGHynBtfDiKlCcvtcmfP2gpBzVgR8wkOhTa521eHYGEchKWLdQ0oWMQoM24pE_duNwKbjw1CNP4tspWf8";
-
-      console.log(_token);
-
-      const authEndpoint = "https://accounts.spotify.com/authorize";
-
-      // Replace with your app's client ID, redirect URI and desired scopes
-      const clientId = "0d5b2b268c1241de958c8883f7d4340e";
-      const redirectUri = "http://localhost:8080/Midl/mixes";
-      const scopes = ["user-top-read"];
-
-      // If there is no token, redirect to Spotify authorization
-      if (!_token) {
-        window.location = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-          "%20"
-        )}&response_type=token&show_dialog=true`;
-      }
     }
   }
 };
@@ -148,4 +100,42 @@ function find(page, items, offset) {
 
 <style lang="stylus">
 @import './styles/config.styl'
+
+.mixes
+  padding: $navbarHeight 2rem 0
+  max-width: 960px
+  margin: 0px auto
+
+  .content:not(.custom)
+    display: grid
+    grid-gap: 40px
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+    max-width: none
+
+  img
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1)
+    border-radius: 3px
+    transform: translateZ(0)
+
+  h3
+    margin-bottom: 0
+    transform: translateZ(0)
+
+  p
+    margin: 0.1rem 0 0 0
+    color: lighten($textColor, 75%)
+    transform: translateZ(0)
+
+  a
+    color: $textColor
+
+    &:hover
+      text-decoration: none
+
+  .content:not(.custom)
+    > *:first-child
+      margin: 0
+
+    a:hover
+      text-decoration: none
 </style>
