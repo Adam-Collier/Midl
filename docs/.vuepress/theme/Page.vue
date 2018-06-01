@@ -5,7 +5,7 @@
       <!-- <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero"> -->
         <div>
           <transition-group name="intro" appear>
-            <h1 key="1">{{data.title}} - {{data.work}}</h1>
+            <h1 key="1">{{data.title}} - {{data.workplace}}</h1>
             <p key="2">{{data.description}}</p>
           </transition-group>
         </div>
