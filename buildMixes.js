@@ -1,55 +1,11 @@
 const fs = require("fs");
 const rp = require("request-promise");
 
-// const Spotify = require("node-spotify-api");
-
-// var spotify = new Spotify({
-//   id:
-//   secret:
-// });
-
-// spotify
-//   .request(
-//     "https://api.spotify.com/v1/users/vugk8qhstm54hhp6kz6o8ageo/playlists"
-//   )
-//   .then(function(data) {
-//     console.log(data);
-//     console.log(data);
-//     let playlists = data.items;
-//     let document = `---
-// mixes: true;
-// ---
-// `;
-//     playlists.forEach((x, i) => {
-//       document += template(x, i);
-//     });
-
-//     console.log(document);
-//     fs.writeFile("./docs/mixes/README.md", document, err => {
-//       if (err) console.log(err);
-
-//       console.log("this has been saved");
-//     });
-//   })
-//   .catch(function(err) {
-//     console.error("Error occurred: " + err);
-//   });
-
-// let template = (x, i) => `
-// <a href="${x.external_urls.spotify}">
-//     <div>
-//         <img src="${x.images[0].url}" alt="">
-//         <h1>${x.name}</h1>
-//         <h2>Mix #${i + 1}</h2>
-//     </div>
-// </a>
-// `;
-
 const TOKEN_URI = "https://accounts.spotify.com/api/token";
 
 let credentials = {
-  id: "",
-  secret: ""
+  id: "0d5b2b268c1241de958c8883f7d4340e",
+  secret: "3a2f9ff80cb0486c88a21e0b39094616"
 };
 
 let getCredentialHeader = () => {
@@ -87,21 +43,23 @@ getToken().then(token => {
 mixes: true;
 ---
 `;
+    let l = playlists.length;
     playlists.forEach((x, i) => {
-      document += template(x, i);
+      document += template(x, i, l);
     });
     fs.writeFile("./docs/mixes/README.md", document, err => {
       if (err) console.log(err);
+      console.log("successfully built mixes!");
     });
   });
 });
 
-let template = (x, i) => `
+let template = (x, i, l) => `
 <a href="${x.external_urls.spotify}">
     <div>
         <img src="${x.images[0].url}" alt="">
-        <h1>${x.name}</h1>
-        <h2>Mix #${i + 1}</h2>
+        <h3>${x.name}</h3>
+        <p>Mix #${l - i}</p>
     </div>
 </a>
 `;
