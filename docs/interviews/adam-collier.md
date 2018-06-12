@@ -1,11 +1,9 @@
 ---
+heroImage: /adam-collier/blah.jpg
 title: Adam Collier
 description: Austrian-born, now New York based designer working on the digital products and services that people use every day.
-image: /adam-collier/blah.jpg
+workplace: Work & Co
 date: 01.03.18
-heroImage: /adam-collier/blah.jpg
-heroTitle: Adam Collier - Work & Co
-heroIntro: Austrian-born, now New York based designer working on the digital products and services that people use every day.
 ---
 
 ## What led you into design?
@@ -24,10 +22,13 @@ We get catered lunch at noon, so I take a break for that and then get back to wo
 
 It’s really quite basic. At Work & Co we always sit together with our project teams, which means we have to move around a lot. That’s why most people keep their desks pretty clean to make that process a little easier.
 
-<div>
-    <img :src="$withBase('/adam-collier/workplace.jpg')" alt="workplace">
-    <img :src="$withBase('/adam-collier/dock.png')" alt="dock">
-</div>
+<img :src="$withBase('/adam-collier/workplace.jpg')" alt="workplace">
+
+> 2017 Macbook Pro 16GB, ergonomic mouse, Deltl screen, Sony Z16 headphones
+
+<img :src="$withBase('/adam-collier/dock.png')" alt="dock">
+
+> Spotify, Affinity Designer, iTerm2, VS Code, Slack
 
 ## Where do you go to get inspired?
 
@@ -47,9 +48,9 @@ One of the first projects I worked on at Work & Co was the mobile app for Virgin
 
 The other project I want to highlight was the mobile app for Marriott which we worked on early in 2016. It was very indicative of our process at Work & Co where we had a focused amount of time concepting, prototyping, and testing ideas. Some of them are far out and crazy, which is how we pushed for a new navigation for Marriott's app. Because the app automatically adjusts based on context—say you're planning a trip or you're checked in to a stay—we opted not to have a traditional home screen or navigation. Instead, you land on the most relevant section and can cycle through the rest using a single button. It's hard to describe (which is why we prototype), but once used in context it is really intuitive and ownable for Marriott. I don't think we'd have arrived at a solution like that without trying out so many other concepts first.
 
-<div>
-    <img :src="$withBase('/adam-collier/dock.png')" alt="dock">
-</div>
+<img :src="$withBase('/adam-collier/dock.png')" alt="dock">
+
+> Spotify, Affinity Designer, iTerm2, VS Code, Slack
 
 ## What design challenges do you face at your company?
 
