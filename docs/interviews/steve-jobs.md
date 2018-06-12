@@ -1,11 +1,9 @@
 ---
+heroImage: /jon.jpg
 title: Steve Jobs
 description: Product designer at Streamlabs. Passionate about designing inclusive, effective, and impactful digital products.
-image: /jon.jpg
+workplace: Apple
 date: 23.05.18
-heroImage: /jon.jpg
-heroTitle: Adam Collier - Work & Co
-heroIntro: Austrian-born, now New York based designer working on the digital products and services that people use every day.
 ---
 
 ## What led you into design?
