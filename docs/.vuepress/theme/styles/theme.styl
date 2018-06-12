@@ -3,7 +3,9 @@
 @require './code'
 @require './custom-blocks'
 @require './arrow'
-@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro:600')
+@require './interviews'
+@require './mixes'
+@import url('https://rsms.me/inter/inter-ui.css');
 
 html
   background: #141d26
@@ -14,6 +16,7 @@ html, body
 
 body
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif
+  font-family: 'Inter UI', sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   font-size: 16px
@@ -56,16 +59,16 @@ body
   border-right: 1px solid $borderColor
   overflow-y: auto
 
-.content:not(.custom)
+.content
   max-width: $contentWidth
   margin: 0 auto
-  padding: 2rem 2.5rem
-
-  > *:first-child
-    margin-top: $navbarHeight
+  padding: 2rem 0
 
   a:hover
     text-decoration: underline
+
+  h2 
+    margin-top: 3.5rem
 
   p.demo
     padding: 1rem 1.5rem
@@ -75,6 +78,8 @@ body
   img
     max-width: 100%
     display: block
+    border-radius: 3px
+    margin-top: 2.5rem
 
 .content.custom
   padding: 0
@@ -97,11 +102,11 @@ kbd
   padding: 0 0.15em
 
 blockquote
-  font-size: 1.2rem
+  font-size: 0.8rem
   color: #999
-  border-left: 0.25rem solid #dfe2e5
+  border-left: 2px solid $accentColor
   margin-left: 0
-  padding-left: 1rem
+  padding-left: 0.6rem
 
 ul, ol
   padding-left: 1.2em
@@ -111,36 +116,32 @@ strong
 
 h1, h2, h3, h4, h5, h6
   font-weight: 600
-  line-height: 1.25
+  line-height: 1.4
   transform: translate3d(0, 0, 0)
 
-  .content:not(.custom) > &
-    margin-top: 0.5rem - $navbarHeight
-    padding-top: ($navbarHeight + 1rem)
-    margin-bottom: 0
-
-    &:first-child
-      margin-top: -1.5rem
-      margin-bottom: 1rem
-
-      + p, + pre, + .custom-block
-        margin-top: 2rem
+  // .content:not(.custom) > &
+  //   margin-top: 0.5rem - $navbarHeight
+  //   padding-top: ($navbarHeight + 1rem)
+  //   margin-bottom: 0
 
   &:hover .header-anchor
     opacity: 1
 
 h1
   font-size: 3rem
-  font-family: 'Source Serif Pro', serif
-  font-weight: 600
+  font-weight: 700
+  letter-spacing: -0.015em
 
 h2
-  font-size: 1.65rem
-  font-family: 'Source Serif Pro', serif
-  font-weight: 600
+  font-size: 2rem
+  font-weight: 700
+  letter-spacing: -0.015em
 
 h3
   font-size: 1.35rem
+  font-weight: 700
+  letter-spacing: -0.015em
+  margin: 0.05em 0 0.6em 0
 
 a.header-anchor
   font-size: 0.85em
@@ -158,11 +159,6 @@ code, kbd
 
 p, ul, ol
   line-height: 1.7
-
-span p
-  color: lighten($textColor, 40%)
-span h1 
-  margin-bottom: 1rem
 
 hr
   border: 0
@@ -193,11 +189,11 @@ th, td
     .sidebar-mask
       display: block
 
-  &.no-navbar
-    .content:not(.custom)
-      h1, h2, h3, h4, h5, h6
-        margin-top: 1.5rem
-        padding-top: 0
+  // &.no-navbar
+  //   .content:not(.custom)
+  //     h1, h2, h3, h4, h5, h6
+  //       margin-top: 1.5rem
+  //       padding-top: 0
 
 @media (min-width: (((((((((((((((((((((((((((((((((($MQMobile + 1px)))))))))))))))))))))))))))))))))))
   .theme-container.no-sidebar
