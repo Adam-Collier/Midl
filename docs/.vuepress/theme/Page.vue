@@ -4,12 +4,13 @@
       <div v-bind:style="{backgroundImage: `url(${$withBase(data.heroImage)})`}"></div>
       <!-- <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero"> -->
         <div>
-          <transition-group name="intro" appear>
-            <h1 key="1">{{data.title}} - {{data.workplace}}</h1>
-            <p key="2">{{data.description}}</p>
+          <transition-group name="intro" v-on:enter="enter" appear>
+            <h1 key="1">{{data.title}}</h1>
+            <h2 key="2">{{data.workplace}}</h2>
+            <p key="3">{{data.description}}</p>
+            <div key="4"></div>
           </transition-group>
         </div>
-      </transition>
     </div>
     <Content :custom="false"/>
     <div class="content edit-link" v-if="editLink">
@@ -100,6 +101,11 @@ export default {
         `Edit this page`
       );
     }
+  },
+  methods: {
+    enter: function (el, done) {
+      el.tagName === "DIV" ? el.classList.add('linePop') : null
+  },
   }
 };
 
@@ -137,7 +143,7 @@ function find(page, items, offset) {
 
   .content
     div
-      padding: 2.5rem 0
+      padding: 2.5rem 0 0
 
   a
     color: $linkColor
@@ -171,32 +177,50 @@ function find(page, items, offset) {
   margin: 0 auto
   padding: 3.6rem 0 0 0
 
-  div
+  > div
     &:nth-of-type(1)
       height: 37.5rem
-      flex: 5 1 350px
+      flex: 4 1 350px
       background-size: cover
       background-position: center center
 
     &:nth-of-type(2)
-      padding: 2rem
+      padding: 0 1rem 0 1rem
+      margin: 2rem
       align-self: flex-end
       flex: 1 1 350px
+      position: relative
+
+      div 
+        position: absolute
+        width: 2px
+        left: 0
+        top: 50%
+        transform: translateY(-50%)
+        background-color: $accentColor
 
 .intro-enter-active
   &:nth-child(1)
     transition: all 500ms 800ms
+    transition-property: opacity, transform
 
   &:nth-child(2)
-    transition: all 500ms 900ms
+    transition: all 500ms 800ms
+    transition-property: opacity, transform
+
+  &:nth-child(3)
+    transition: all 500ms 1000ms
+    transition-property: opacity, transform
 
 .intro-enter
-  opacity: 0
-  transform: translateY(30px)
+  &:not(:last-child)
+    opacity: 0
+    transform: translateX(-0.8rem)
 
 .intro-enter-to
-  opacity: 1
-  transform: translateY(0px)
+  &:not(:last-child)
+    opacity: 1
+    transform: translateX(0px)
 
 .description-delay
   transition: all 500ms 1000ms
@@ -207,4 +231,21 @@ iframe
   margin: 0 auto
   border-radius: 5px
   margin: 4em 0 3.5em 0
+
+span p
+  color: lighten($textColor, 40%)
+
+span h2, span h1
+  margin: 0
+
+.linePop
+  animation: linePop 250ms 700ms ease-in-out forwards 
+
+@keyframes linePop 
+  0%
+    height: 0%
+    opacity: 0
+  100% 
+    height: 100%
+    opacity: 1
 </style>
