@@ -32,6 +32,8 @@ const opts = {
   json: true
 };
 
+
+
 getToken().then(token => {
   rp({
     uri: "https://api.spotify.com/v1/users/vugk8qhstm54hhp6kz6o8ageo/playlists",
@@ -39,14 +41,16 @@ getToken().then(token => {
     json: true
   }).then(data => {
     let playlists = data.items;
+    console.log(playlists);
+    let l = playlists.length;
+    console.log(playlists.map((x, i) => template(x, i, l)))
     let document = `---
 mixes: true;
 ---
+${playlists.map((x, i) => template(x, i, l)).join('')}
+<!-- more -->
 `;
-    let l = playlists.length;
-    playlists.forEach((x, i) => {
-      document += template(x, i, l);
-    });
+
     fs.writeFile("./docs/mixes/README.md", document, err => {
       if (err) console.log(err);
       console.log("successfully built mixes!");
