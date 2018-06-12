@@ -17,6 +17,7 @@
         <router-link :to="article.path">
           <img v-if="article.frontmatter.heroImage" :src="$withBase(article.frontmatter.heroImage)" alt="">
           <h2>{{article.frontmatter.title}}</h2>
+          <h3>{{article.frontmatter.workplace}}</h3>
           <p>{{article.frontmatter.description}}</p>
         </router-link>
       </div>
