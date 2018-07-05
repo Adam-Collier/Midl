@@ -75,11 +75,9 @@ export default {
     },
     mixes() {
       // let mixes = this.$site.pages
-      console.log(this.$site.pages)
       let mixes = this.$site.pages.filter(x => {
-        return x.path.match(/mixes/)
-      })
-      console.log(mixes)
+        return x.path.match(/mixes/);
+      });
       return mixes[0].excerpt;
     }
   }
@@ -166,6 +164,9 @@ export default {
     border-top: 1px solid $borderColor
     text-align: center
     color: lighten($textColor, 25%)
+
+  .mixes
+    padding: 0.5rem 0 2rem 0
 
 @media (max-width: $MQMobile)
   .home
