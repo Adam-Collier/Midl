@@ -103,9 +103,9 @@ export default {
     }
   },
   methods: {
-    enter: function (el, done) {
-      el.tagName === "DIV" ? el.classList.add('linePop') : null
-  },
+    enter: function(el, done) {
+      el.tagName === "DIV" ? el.classList.add("linePop") : null;
+    }
   }
 };
 
@@ -141,10 +141,6 @@ function find(page, items, offset) {
 .page
   padding-bottom: 2rem
 
-  .content
-    div
-      padding: 2.5rem 0 0
-
   a
     color: $linkColor
 
@@ -175,7 +171,6 @@ function find(page, items, offset) {
   align-items: flex-start
   max-width: 1500px
   margin: 0 auto
-  padding: 3.6rem 0 0 0
 
   > div
     &:nth-of-type(1)
@@ -191,7 +186,7 @@ function find(page, items, offset) {
       flex: 1 1 350px
       position: relative
 
-      div 
+      div
         position: absolute
         width: 2px
         left: 0
@@ -239,13 +234,14 @@ span h2, span h1
   margin: 0
 
 .linePop
-  animation: linePop 250ms 700ms ease-in-out forwards 
+  animation: linePop 250ms 700ms ease-in-out forwards
 
-@keyframes linePop 
+@keyframes linePop
   0%
     height: 0%
     opacity: 0
-  100% 
+
+  100%
     height: 100%
     opacity: 1
 </style>
