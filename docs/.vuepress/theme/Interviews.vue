@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="interview-page">
     <div class="hero">
       <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero">
       <p class="action" v-if="data.actionText && data.actionLink">
@@ -12,10 +12,14 @@
         <p>{{ feature.details }}</p>
       </div>
     </div>
+    <h1>Interviews</h1>
     <div class="interviews" v-if="articles.length">
-      <div class="interview" v-for="article in articles">
+      <div class="interview" v-for="(article, index) in articles"
+      v-bind:class="{ first: index==0 }">
         <router-link :to="article.path">
-          <img v-if="article.frontmatter.heroImage" :src="$withBase(article.frontmatter.heroImage)" alt="">
+          <div>
+            <img v-if="article.frontmatter.heroImage" :src="$withBase(article.frontmatter.heroImage)" alt="">
+          </div>
           <h2>{{article.frontmatter.title}}</h2>
           <h3>{{article.frontmatter.workplace}}</h3>
           <p>{{article.frontmatter.description}}</p>
@@ -57,6 +61,7 @@ export default {
           );
         });
       console.log(interviews);
+      interviews[0].first = true;
       return interviews;
     }
   }
