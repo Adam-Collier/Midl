@@ -1,25 +1,28 @@
 <template>
-  <div class="mixes">
-      <Content :custom="false"/>
-    <div class="content edit-link" v-if="editLink">
-      <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
-      <OutboundLink/>
+  <div class="page">
+    <div class="mixes">
+        <h1>Mixes</h1>
+        <Content :custom="false"/>
+      <div class="content edit-link" v-if="editLink">
+        <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
+        <OutboundLink/>
+      </div>
+      <div class="content page-nav" v-if="prev || next">
+        <p class="inner">
+          <span v-if="prev" class="prev">
+            ← <router-link v-if="prev" class="prev" :to="prev.path">
+              {{ prev.title || prev.path }}
+            </router-link>
+          </span>
+          <span v-if="next" class="next">
+            <router-link v-if="next" :to="next.path">
+              {{ next.title || next.path }}
+            </router-link> →
+          </span>
+        </p>
+      </div>
+      <slot name="bottom"/>
     </div>
-    <div class="content page-nav" v-if="prev || next">
-      <p class="inner">
-        <span v-if="prev" class="prev">
-          ← <router-link v-if="prev" class="prev" :to="prev.path">
-            {{ prev.title || prev.path }}
-          </router-link>
-        </span>
-        <span v-if="next" class="next">
-          <router-link v-if="next" :to="next.path">
-            {{ next.title || next.path }}
-          </router-link> →
-        </span>
-      </p>
-    </div>
-    <slot name="bottom"/>
   </div>
 </template>
 
