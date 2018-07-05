@@ -5,7 +5,7 @@
 @require './arrow'
 @require './interviews'
 @require './mixes'
-@import url('https://rsms.me/inter/inter-ui.css');
+@import url('https://rsms.me/inter/inter-ui.css')
 
 html
   background: #141d26
@@ -23,7 +23,8 @@ body
   color: $textColor
 
 .page
-  padding-left: $sidebarWidth
+  // padding-left: $sidebarWidth
+  padding: $navbarHeight 0 0
 
 .navbar
   position: fixed
@@ -62,12 +63,12 @@ body
 .content
   max-width: $contentWidth
   margin: 0 auto
-  padding: 2rem 0
+  padding: 0.5rem 0
 
   a:hover
     text-decoration: underline
 
-  h2 
+  h2
     margin-top: 3.5rem
 
   p.demo
@@ -79,7 +80,12 @@ body
     max-width: 100%
     display: block
     border-radius: 3px
-    margin-top: 2.5rem
+
+  p+img
+    margin-top: 3.5rem
+
+  blockquote+img
+    margin-top: 2rem
 
 .content.custom
   padding: 0
@@ -103,10 +109,14 @@ kbd
 
 blockquote
   font-size: 0.8rem
-  color: #999
+  color: lighten($textColor, 50%)
   border-left: 2px solid $accentColor
   margin-left: 0
-  padding-left: 0.6rem
+  margin-bottom: 0
+  padding-left: 0.5rem
+
+  p
+    margin-bottom: 0
 
 ul, ol
   padding-left: 1.2em
@@ -120,10 +130,9 @@ h1, h2, h3, h4, h5, h6
   transform: translate3d(0, 0, 0)
 
   // .content:not(.custom) > &
-  //   margin-top: 0.5rem - $navbarHeight
-  //   padding-top: ($navbarHeight + 1rem)
-  //   margin-bottom: 0
-
+  // margin-top: 0.5rem - $navbarHeight
+  // padding-top: ($navbarHeight + 1rem)
+  // margin-bottom: 0
   &:hover .header-anchor
     opacity: 1
 
@@ -189,13 +198,7 @@ th, td
     .sidebar-mask
       display: block
 
-  // &.no-navbar
-  //   .content:not(.custom)
-  //     h1, h2, h3, h4, h5, h6
-  //       margin-top: 1.5rem
-  //       padding-top: 0
-
-@media (min-width: (((((((((((((((((((((((((((((((((($MQMobile + 1px)))))))))))))))))))))))))))))))))))
+@media (min-width: ((((((((((((((((((((((((((((((((((($MQMobile + 1px))))))))))))))))))))))))))))))))))))
   .theme-container.no-sidebar
     .sidebar
       display: none
