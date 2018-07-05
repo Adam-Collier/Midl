@@ -58,15 +58,15 @@ export default {
       if (toPath.includes("interview") && fromPath == "/") {
         this.transitionName = "interview";
       } else if (fromPath == "/" && toPath.includes("mixes")) {
-        this.transitionName = "home";
+        this.transitionName = "mixes";
       } else if (fromPath.includes("mixes") && toPath == "/") {
-        this.transitionName = "interview";
+        this.transitionName = "homemixes";
       } else if (fromPath.includes("interview") && toPath == "/") {
         this.transitionName = "home";
       } else if (fromPath.includes("interview") && toPath.includes("mixes")) {
-        this.transitionName = "home";
+        this.transitionName = "mixes";
       } else if (fromPath.includes("mixes") && toPath.includes("interview")) {
-        this.transitionName = "interview";
+        this.transitionName = "homemixes";
       }
     }
   },
@@ -151,7 +151,7 @@ export default {
     updateMeta();
 
     // configure progress bar
-    nprogress.configure({ showSpinner: false });
+    // nprogress.configure({ showSpinner: false });
 
     this.$router.beforeEach((to, from, next) => {
       if (
@@ -287,7 +287,7 @@ $transitionDelay = 400ms
 
 .mixes-enter
   opacity: 0
-  transform: translateX($transition)
+  transform: translateY($transition)
 
 .mixes-enter-to, .interview-leave
   opacity: 1
@@ -295,6 +295,24 @@ $transitionDelay = 400ms
 
 .mixes-leave-to
   opacity: 0
-  transform: translateX(- $transition)
+  transform: translateY(- $transition)
+
+.homemixes-enter-active
+  transition: all $transitionSpeed $transitionDelay
+
+.homemixes-leave-active
+  transition: all $transitionSpeed ease-in
+
+.homemixes-enter
+  opacity: 0
+  transform: translateY(- $transition)
+
+.homemixes-enter-to, .interview-leave
+  opacity: 1
+  transform: translateY(0px)
+
+.homemixes-leave-to
+  opacity: 0
+  transform: translateY($transition)
 </style>
 
