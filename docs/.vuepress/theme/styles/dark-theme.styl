@@ -9,7 +9,7 @@
   body
     color: $textColor
 
-  .home .interview p, .home .interview h2
+  .home .interview p, .home .interview h2, .home .interview h3
     color: #FFFFFF
 
   .navbar
@@ -21,9 +21,6 @@
     border-right: 1px solid $borderColor
     background-color: $bgPrimary
 
-  // a
-  //   color: $textColor
-
   p a code
     color: $accentColor
 
@@ -31,10 +28,6 @@
     background: #eee
     border: solid 0.15rem #ddd
     border-bottom: solid 0.25rem #ddd
-
-  blockquote
-    color: #999
-    border-left: 0.25rem solid #dfe2e5
 
   span
     p
@@ -59,11 +52,20 @@
     color: $textColor
 
   .search-box input
-    background: #182430 url(../search.svg) 0.6rem 0.5rem no-repeat
+    background: $bgSecondary url(../search.svg) 0.6rem 0.5rem no-repeat
     background-size: 1rem
     color: $textColor
-    border-color: #141d26
+    border-color: $borderColorLight
 
   .switch-theme
     transition: $transition
-    fill: #3EAF7C
+    fill: #f77b2d
+  
+  .mixes 
+    h3
+      color: $textColor
+    
+    p 
+      color: lighten($textColor, 40%)
+    
+

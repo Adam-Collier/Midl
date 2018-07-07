@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="intro">
+      <h2>{{data.intro}}</h2>
+    </div>
     <div class="hero">
       <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero">
       <p class="action" v-if="data.actionText && data.actionLink">
@@ -12,14 +15,20 @@
         <p>{{ feature.details }}</p>
       </div>
     </div>
+    <h1>Latest Interviews</h1>
     <div class="interviews" v-if="articles.length">
       <div class="interview" v-for="article in articles">
         <router-link :to="article.path">
           <img v-if="article.frontmatter.heroImage" :src="$withBase(article.frontmatter.heroImage)" alt="">
           <h2>{{article.frontmatter.title}}</h2>
+          <h3>{{article.frontmatter.workplace}}</h3>
           <p>{{article.frontmatter.description}}</p>
         </router-link>
       </div>
+    </div>
+    <h1>Latest Mixes</h1>
+    <div class="mixes">
+      <div v-html="mixes"></div>
     </div>
     <Content custom/>
     <div class="footer" v-if="data.footer">
@@ -63,6 +72,13 @@ export default {
         });
       console.log(interviews);
       return interviews;
+    },
+    mixes() {
+      // let mixes = this.$site.pages
+      let mixes = this.$site.pages.filter(x => {
+        return x.path.match(/mixes/);
+      });
+      return mixes[0].excerpt;
     }
   }
 };
@@ -76,29 +92,13 @@ export default {
   max-width: 960px
   margin: 0px auto
 
-  .interviews
-    display: grid
-    grid-gap: 40px
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
-    padding-top: 2.5rem
-
-  .interview
-    img
-      width: 100%
-      transform: translateZ(0)
-
-    h2, p
-      margin-bottom: 0
-
-    h2
-      margin-top: 0.5em
-
-    p
-      font-size: 0.9rem
-      font-weight: 400
-      margin-top: 0.6em
-      color: lighten($textColor, 40%)
-      transform: translateZ(0)
+  .intro
+    width: 80%
+    margin: 6rem auto 7rem auto
+    line-height: 2
+    text-decoration: underline
+    text-decoration-color: $accentColor
+    text-underline-position: under
 
   .hero
     text-align: center
@@ -164,6 +164,9 @@ export default {
     border-top: 1px solid $borderColor
     text-align: center
     color: lighten($textColor, 25%)
+
+  .mixes
+    padding: 0.5rem 0 2rem 0
 
 @media (max-width: $MQMobile)
   .home
