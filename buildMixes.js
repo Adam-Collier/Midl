@@ -5,7 +5,7 @@ const TOKEN_URI = "https://accounts.spotify.com/api/token";
 
 let credentials = {
   id: "0d5b2b268c1241de958c8883f7d4340e",
-  secret: "3a2f9ff80cb0486c88a21e0b39094616"
+  secret: "a4a126a9bbf54d98b5e5dc1446e9691c"
 };
 
 let getCredentialHeader = () => {
@@ -32,8 +32,6 @@ const opts = {
   json: true
 };
 
-
-
 getToken().then(token => {
   rp({
     uri: "https://api.spotify.com/v1/users/vugk8qhstm54hhp6kz6o8ageo/playlists",
@@ -43,27 +41,31 @@ getToken().then(token => {
     let playlists = data.items;
     console.log(playlists);
     let l = playlists.length;
-    console.log(playlists.map((x, i) => template(x, i, l)))
-    let document = `---
-mixes: true;
----
-${playlists.map((x, i) => template(x, i, l)).join('')}
-<!-- more -->
-`;
+    // console.log(playlists.map((x, i) => template(x, i, l)));
 
-    fs.writeFile("./docs/mixes/README.md", document, err => {
+    let arr = [];
+
+    playlists.map((x, i) => {
+      arr.push({ name: x.name, cover: x.images[0].url, id: x.id })
+    })
+
+    let js = `
+export default ${JSON.stringify(arr, null, 2)}
+`
+
+    console.log(arr)
+
+    fs.writeFile("./docs/.vuepress/mixes.js", js, 'utf-8', err => {
       if (err) console.log(err);
       console.log("successfully built mixes!");
     });
   });
 });
 
-let template = (x, i, l) => `
-<a href="${x.external_urls.spotify}">
-    <div>
-        <img src="${x.images[0].url}" alt="">
-        <h3>${x.name}</h3>
-        <p>Mix #${l - i}</p>
-    </div>
-</a>
-`;
+// let template = (x, i, l) => `
+// <div data-embed="https://open.spotify.com/embed/user/1134435866/playlist/${x.id}">
+//     <img src="${x.images[0].url}" alt="">
+//     <h3>${x.name}</h3>
+//     <p>Mix #${l - i}</p>
+// </div>
+// `;

@@ -1,8 +1,17 @@
 <template>
-  <div class="page">
+  <!-- <div class="page"> -->
     <div class="mixes">
-        <h1>Mixes</h1>
-        <Content :custom="false"/>
+      <h1>Mixes</h1>
+      <!-- <Content :custom="false"/> -->
+      <div v-if="playlists.length">
+        <div v-for="playlist in playlists">
+          <div @click="switchPlaylist">
+            <img :src="playlist.cover" alt="">
+            <h3>{{playlist.name}}</h3>
+            <p>Mix #4</p>
+          </div>
+        </div>
+      </div>
       <div class="content edit-link" v-if="editLink">
         <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
         <OutboundLink/>
@@ -22,8 +31,11 @@
         </p>
       </div>
       <slot name="bottom"/>
+      <div class="playlist">
+        <iframe src="https://open.spotify.com/embed/album/1yyCXBEu27Ia1Y3torWIwC" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -33,9 +45,17 @@ import { resolvePage, normalize, outboundRE, endingSlashRE } from "./util";
 export default {
   components: { OutboundLink },
   props: ["sidebarItems"],
+  methods: {
+    switchPlaylist(event) {
+      console.log("this has been clicked");
+    }
+  },
   computed: {
     data() {
       return this.$page.frontmatter;
+    },
+    playlists() {
+      return this.$mixes;
     },
     editLink() {
       const {

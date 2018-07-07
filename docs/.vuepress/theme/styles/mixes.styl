@@ -1,19 +1,21 @@
 @import './config.styl'
 
 .mixes
-  padding: 0.5rem 0 2rem 0
+  padding: $navbarHeight 2rem 0
   max-width: 960px
   margin: 0px auto
+  position: relative
+  overflow: hidden
 
-  .content 
+  div
     max-width: 960px
 
-
   > div
-    display: grid
-    grid-gap: 30px
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
-    max-width: none
+    &:first-of-type
+      display: grid
+      grid-gap: 30px
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+      max-width: none
 
     img
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1)
@@ -40,3 +42,10 @@
 
     a:hover
       text-decoration: none
+
+  .playlist
+    margin-bottom: 0
+    position: absolute
+    max-width: 960px
+    top: 100%
+    height: 200px

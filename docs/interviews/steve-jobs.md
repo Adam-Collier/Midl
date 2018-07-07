@@ -46,7 +46,7 @@ Personally, I think the further you get in your career, the more second-nature t
 
 I’m also working on becoming a better communicator every day. I find that being better at listening and reading people’s intentions is the best way to get to the right solution, but it’s probably the hardest part of the job. It also takes time, which is tough for an impatient person like myself.
 
-<iframe src="https://open.spotify.com/embed/album/1yyCXBEu27Ia1Y3torWIwC" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+<iframe src="https://open.spotify.com/embed/album/1yyCXBEu27Ia1Y3torWIwC" style="border-radius:10px" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
 ## Anything you want to promote or plug?
 

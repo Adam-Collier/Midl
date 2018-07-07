@@ -12,7 +12,14 @@
     "type": "git",
     "url": "git+https://github.com/Adam-Collier/Midl.git"
   },
-  "keywords": ["blog", "vuepress", "vue", "interview", "design", "mixes"],
+  "keywords": [
+    "blog",
+    "vuepress",
+    "vue",
+    "interview",
+    "design",
+    "mixes"
+  ],
   "author": "Adam Collier",
   "license": "ISC",
   "bugs": {
@@ -20,6 +27,7 @@
   },
   "homepage": "https://github.com/Adam-Collier/Midl#readme",
   "dependencies": {
+    "request": "^2.87.0",
     "request-promise": "^4.2.2"
   }
 }

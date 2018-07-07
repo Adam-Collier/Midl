@@ -107,6 +107,13 @@ export default {
       el.tagName === "DIV" ? el.classList.add("linePop") : null;
     }
   }
+  // mounted() {
+  //   let el = document.querySelector("iframe");
+  //   let wrapper = document.createElement("div");
+  //   wrapper.classList.add("playlist");
+  //   el.parentNode.insertBefore(wrapper, el);
+  //   return wrapper.appendChild(el);
+  // }
 };
 
 function resolvePrev(page, items) {
@@ -224,7 +231,11 @@ iframe
   width: 100%
   display: block
   margin: 0 auto
+
+.playlist
+  width: 100%
   border-radius: 5px
+  overflow: hidden
   margin: 4em 0 3.5em 0
 
 span p
