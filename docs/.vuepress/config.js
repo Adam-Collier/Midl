@@ -1,5 +1,4 @@
 module.exports = {
-  base: "/Midl/",
   title: "Midl",
   description: "test",
   themeConfig: {
