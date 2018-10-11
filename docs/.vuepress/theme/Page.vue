@@ -2,13 +2,12 @@
   <div class="page">
     <div v-if="data.heroImage" class="interview-hero">
       <div v-bind:style="{backgroundImage: `url(${$withBase(data.heroImage)})`}"></div>
-      <!-- <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero"> -->
         <div>
           <transition-group name="intro" v-on:enter="enter" appear>
-            <h1 key="1">{{data.title}}</h1>
-            <h2 key="2">{{data.workplace}}</h2>
-            <p key="3">{{data.description}}</p>
-            <div key="4"></div>
+              <h1 key="1">{{data.title}}</h1>
+              <h2 key="2">{{data.workplace}}</h2>
+              <p key="3">{{data.description}}</p>
+              <div key="4"></div>
           </transition-group>
         </div>
     </div>
@@ -106,14 +105,14 @@ export default {
     enter: function(el, done) {
       el.tagName === "DIV" ? el.classList.add("linePop") : null;
     }
+  },
+  mounted() {
+    let el = document.querySelector("iframe");
+    let wrapper = document.createElement("div");
+    wrapper.classList.add("playlist");
+    el.parentNode.insertBefore(wrapper, el);
+    return wrapper.appendChild(el);
   }
-  // mounted() {
-  //   let el = document.querySelector("iframe");
-  //   let wrapper = document.createElement("div");
-  //   wrapper.classList.add("playlist");
-  //   el.parentNode.insertBefore(wrapper, el);
-  //   return wrapper.appendChild(el);
-  // }
 };
 
 function resolvePrev(page, items) {
