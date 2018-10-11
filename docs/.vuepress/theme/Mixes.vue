@@ -1,41 +1,19 @@
 <template>
-  <!-- <div class="page"> -->
-    <div class="mixes">
-      <h1>Mixes</h1>
-      <!-- <Content :custom="false"/> -->
-      <div v-if="playlists.length">
-        <div v-for="playlist in playlists">
-          <div @click="switchPlaylist">
-            <img :src="playlist.cover" alt="">
-            <h3>{{playlist.name}}</h3>
-            <p>Mix #4</p>
-          </div>
+  <div class="mixes">
+    <h1><slot/></h1>
+    <div v-if="playlists.length">
+      <div v-for="(playlist, index) in playlists">
+        <div :data-id="playlist.id" @click="switchPlaylist($event)">
+          <img :src="playlist.cover" alt="">
+          <h3>{{playlist.name}}</h3>
+          <p>Mix #{{playlists.length - index}}</p>
         </div>
       </div>
-      <div class="content edit-link" v-if="editLink">
-        <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
-        <OutboundLink/>
-      </div>
-      <div class="content page-nav" v-if="prev || next">
-        <p class="inner">
-          <span v-if="prev" class="prev">
-            ← <router-link v-if="prev" class="prev" :to="prev.path">
-              {{ prev.title || prev.path }}
-            </router-link>
-          </span>
-          <span v-if="next" class="next">
-            <router-link v-if="next" :to="next.path">
-              {{ next.title || next.path }}
-            </router-link> →
-          </span>
-        </p>
-      </div>
-      <slot name="bottom"/>
-      <div class="playlist">
-        <iframe src="https://open.spotify.com/embed/album/1yyCXBEu27Ia1Y3torWIwC" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      </div>
     </div>
-  <!-- </div> -->
+    <div class="playlist" :class="{show: showPlaylist}">
+      <iframe ref="iframe" :src="`https://open.spotify.com/embed/user/1134435866/playlist/${playlist}`" height="200px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -45,52 +23,34 @@ import { resolvePage, normalize, outboundRE, endingSlashRE } from "./util";
 export default {
   components: { OutboundLink },
   props: ["sidebarItems"],
+  data: function() {
+    return {
+      showPlaylist: "",
+      playlist: ""
+    };
+  },
   methods: {
     switchPlaylist(event) {
-      console.log("this has been clicked");
+      let playlistId = event.currentTarget.dataset.id;
+
+      if (this.playlist == playlistId) return;
+      if (this.showPlaylist === "") this.showPlaylist = true;
+
+      this.showPlaylist = false;
+
+      setTimeout(() => {
+        this.playlist = playlistId;
+      }, 400);
+
+      let iframe = this.$refs.iframe;
+      iframe.onload = () => {
+        this.showPlaylist = true;
+      };
     }
   },
   computed: {
-    data() {
-      return this.$page.frontmatter;
-    },
     playlists() {
       return this.$mixes;
-    },
-    editLink() {
-      const {
-        repo,
-        editLinks,
-        docsDir = "",
-        docsBranch = "master",
-        docsRepo = repo
-      } = this.$site.themeConfig;
-
-      let path = normalize(this.$page.path);
-      if (endingSlashRE.test(path)) {
-        path += "README.md";
-      } else {
-        path += ".md";
-      }
-
-      if (docsRepo && editLinks) {
-        const base = outboundRE.test(docsRepo)
-          ? docsRepo
-          : `https://github.com/${docsRepo}`;
-        return (
-          base.replace(endingSlashRE, "") +
-          `/edit/${docsBranch}/` +
-          docsDir.replace(endingSlashRE, "") +
-          path
-        );
-      }
-    },
-    editLinkText() {
-      return (
-        this.$themeLocaleConfig.editLinkText ||
-        this.$site.themeConfig.editLinkText ||
-        `Edit this page`
-      );
     }
   }
 };
@@ -120,3 +80,27 @@ function find(page, items, offset) {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.playlist
+  transition: all 400ms ease-in-out
+  margin-bottom: 0
+  position: fixed
+  width: 600px
+  left: 50%
+  transform: translate(-50%, 0px)
+  max-width: 960px
+  bottom: -231px
+  height: 231px
+
+iframe
+  height: 231px
+  width: 100%
+
+.show
+  transform: translate(-50%, -251px)
+
+.d.by.bz.c0
+  overflow-y: scroll
+</style>
+
