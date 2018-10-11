@@ -52,7 +52,7 @@
     color: $textColor
 
   .search-box input
-    background: $bgSecondary url(../search.svg) 0.6rem 0.5rem no-repeat
+    background: $bgSecondary url('../search.svg') 0.6rem 0.5rem no-repeat
     background-size: 1rem
     color: $textColor
     border-color: $borderColorLight
@@ -60,12 +60,35 @@
   .switch-theme
     transition: $transition
     fill: #f77b2d
-  
-  .mixes 
+
+  .mixes
     h3
       color: $textColor
-    
-    p 
-      color: lighten($textColor, 40%)
-    
 
+    p
+      color: lighten($textColor, 40%)
+
+  .interview-page
+    .interview
+      &:nth-of-type(3n+5)
+        &:before
+          background: #656161
+
+        &:after
+          background: #656161
+
+      &:nth-child(n+1):nth-child(-n+3)
+        &:before
+          background: #656161
+
+  .home
+    .interview
+      &:nth-of-type(3n+2)
+        &:before
+          background: #656161
+
+        &:after
+          background: #656161
+
+  .interview h2, .interview p, .interview h3
+    color: #FFFFFF
