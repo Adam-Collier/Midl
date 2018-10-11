@@ -14,10 +14,10 @@
     </div>
     <transition :name="transitionName" @after-leave="afterLeave">
       <template>
-        <Home v-if="$page.frontmatter.home"/>
-        <Interviews v-if="$page.frontmatter.interviews"/>
-        <Mixes v-if="$page.frontmatter.mixes"/>
-        <Page v-if :sidebar-items="sidebarItems">
+        <Home v-if="$page.frontmatter.home" :key="$page.key"/>
+        <Interviews v-if="$page.frontmatter.interviews" :key="$page.key">Interviews</Interviews>
+        <Mixes v-if="$page.frontmatter.mixes" :key="$page.key">Mixes</Mixes>
+        <Page v-if :sidebar-items="sidebarItems" :key="$page.key">
           <slot name="page-top" slot="top"/>
           <slot name="page-bottom" slot="bottom"/>
         </Page>
@@ -259,7 +259,7 @@ $transitionDelay = 400ms
 
 .interview-leave-to
   opacity: 0
-  transform: translateX(- $transition)
+  transform: translateX((- $transition))
 
 .home-enter-active
   transition: all $transitionSpeed $transitionDelay
@@ -269,7 +269,7 @@ $transitionDelay = 400ms
 
 .home-enter
   opacity: 0
-  transform: translateX(- $transition)
+  transform: translateX((- $transition))
 
 .home-enter-to, .interview-leave
   opacity: 1
@@ -295,7 +295,7 @@ $transitionDelay = 400ms
 
 .mixes-leave-to
   opacity: 0
-  transform: translateY(- $transition)
+  transform: translateY((- $transition))
 
 .homemixes-enter-active
   transition: all $transitionSpeed $transitionDelay
@@ -305,7 +305,7 @@ $transitionDelay = 400ms
 
 .homemixes-enter
   opacity: 0
-  transform: translateY(- $transition)
+  transform: translateY((- $transition))
 
 .homemixes-enter-to, .interview-leave
   opacity: 1
