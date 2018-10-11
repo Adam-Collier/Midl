@@ -15,21 +15,8 @@
         <p>{{ feature.details }}</p>
       </div>
     </div>
-    <h1>Latest Interviews</h1>
-    <div class="interviews" v-if="articles.length">
-      <div class="interview" v-for="article in articles">
-        <router-link :to="article.path">
-          <img v-if="article.frontmatter.heroImage" :src="$withBase(article.frontmatter.heroImage)" alt="">
-          <h2>{{article.frontmatter.title}}</h2>
-          <h3>{{article.frontmatter.workplace}}</h3>
-          <p>{{article.frontmatter.description}}</p>
-        </router-link>
-      </div>
-    </div>
-    <h1>Latest Mixes</h1>
-    <div class="mixes">
-      <div v-html="mixes"></div>
-    </div>
+    <Interviews>Latest Interviews</Interviews>
+    <Mixes>Latest Mixes</Mixes>
     <Content custom/>
     <div class="footer" v-if="data.footer">
       {{ data.footer }}
@@ -39,12 +26,17 @@
 
 <script>
 import NavLink from "./NavLink.vue";
+import Mixes from "./Mixes.vue";
+import Interviews from "./Interviews.vue";
 
 export default {
-  components: { NavLink },
+  components: { NavLink, Interviews, Mixes },
   computed: {
     data() {
       return this.$page.frontmatter;
+    },
+    playlists() {
+      return this.$mixes;
     },
     actionLink() {
       return {
@@ -53,25 +45,7 @@ export default {
       };
     },
     articles() {
-      let interviews = this.$site.pages
-        .filter(x => {
-          console.log;
-          return x.path.match(/(?=.*interviews)(?=.*html)/);
-        })
-        .sort((a, b) => {
-          return (
-            b.frontmatter.date
-              .split(".")
-              .reverse()
-              .join("") -
-            a.frontmatter.date
-              .split(".")
-              .reverse()
-              .join("")
-          );
-        });
-      console.log(interviews);
-      return interviews;
+      return this.$interviews;
     },
     mixes() {
       // let mixes = this.$site.pages
